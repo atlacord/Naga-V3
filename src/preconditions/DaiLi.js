@@ -17,11 +17,9 @@ class DaiLiPrecondition extends Precondition {
   async hasPerms(member) {
     if (this.container.developers.includes(member.id)) return this.ok();
 
-    const roleIds = member.roles.cache.map(role => role.id);
-
-    const staffRoles = [this.container.staff.get('Dai Li'), this.container.staff.get('Sentry')];
-
-    const hasPermission = staffRoles.some((r) => roleIds.includes(r)) || member.permissions.has(PermissionFlagsBits.Administrator);
+    const hasPermission = member.permissions.has(PermissionFlagsBits.ModerateMembers) || 
+                          member.permissions.has(PermissionFlagsBits.BanMembers) || 
+                          member.permissions.has(PermissionFlagsBits.Administrator);
 
     if (hasPermission) return this.ok();
 

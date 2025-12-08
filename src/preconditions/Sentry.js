@@ -17,9 +17,7 @@ class SentryPrecondition extends Precondition {
   async hasPerms(member) {
     if (this.container.developers.includes(member.id)) return this.ok();
 
-    const roleIds = member.roles.cache.map(role => role.id);
-
-    const hasPermission = roleIds.includes(this.container.staff.get('Sentry')) || member.permissions.has(PermissionFlagsBits.Administrator);
+    const hasPermission = member.permissions.has(PermissionFlagsBits.BanMembers) || member.permissions.has(PermissionFlagsBits.Administrator);
 
     if (hasPermission) return this.ok();
 
