@@ -79,7 +79,7 @@ class Help extends Command {
 
     embedDescription.push(command.description ? `**Description:** ${command.description}` : 'None.');
 
-    if (command.aliases && command.aliases.length > 0) embedDescription.push(`**Alises:** ${command.aliases.join(', ')}`);
+    if (command.aliases && command.aliases.length > 0) embedDescription.push(`**Aliases:** ${command.aliases.join(', ')}`);
 
     if (command.detailedDescription && Object.keys(command.detailedDescription).length > 0) {
       for (let [name, description] of Object.entries(command.detailedDescription)) {
