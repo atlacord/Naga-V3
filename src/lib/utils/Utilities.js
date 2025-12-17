@@ -1,20 +1,40 @@
 class Utilities {
-  async sendSuccess(channel, content) {
-    return await channel.send({ embeds: [
+  async sendSuccess(channelOrInteraction, content) {
+    const embeds = [
       { 
         color: 4437377,
         description: `<:yes:917982955362734100> ${content}`
       }
-    ]});
+    ];
+
+    if (channelOrInteraction.isChatInputCommand?.()) {
+      if (channelOrInteraction.deferred) {
+        return await interaction.editReply({ embeds: embeds });
+      } else {
+        return await interaction.reply({ embeds: embeds });
+      }
+    }
+
+    return await channelOrInteraction.send({ embeds: embeds });
   }
 
-  async sendError(channel, content) {
-    return await channel.send({ embeds: [
+  async sendError(channelOrInteraction, content) {
+    const embeds = [
       {
         color: 15747399,
         description: `<:no:917982868922335272> ${content}`
       }
-    ]});
+    ];
+
+    if (channelOrInteraction.isChatInputCommand?.()) {
+      if (channelOrInteraction.deferred) {
+        return await interaction.editReply({ embeds: embeds });
+      } else {
+        return await interaction.reply({ embeds: embeds });
+      }
+    }
+
+    return await channelOrInteraction.send({ embeds: embeds });
   }
 
   hexToRgb(hex) {
