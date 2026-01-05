@@ -13,13 +13,12 @@ class ShowLoadedListeners extends Listener {
     const listenerStore = [...this.container.stores.get('listeners')];
     const nonCoreListeners = listenerStore.filter(([name]) => !name.startsWith('Core'));
     const nonStartUpTaskListeners = nonCoreListeners.filter(([_, listener]) => listener.location.directories[0] != 'StartUpTasks');
-    const listenerNames = nonStartUpTaskListeners.map(([name, _]) => name);
 
-    if (listenerNames.length != 0) {
+    if (nonStartUpTaskListeners.length != 0) {
       this.container.logger.info('Loading listeners...');
 
-      for (const listenerName of listenerNames) {
-        this.container.logger.info(`+ Loaded ${listenerName}`);
+      for (const listener of nonStartUpTaskListeners) {
+        if (listener.enabled) this.container.logger.info(`+ Loaded ${listener.name}`);
       }
     }
 
