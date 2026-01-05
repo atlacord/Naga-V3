@@ -69,6 +69,29 @@ class Utilities {
     this.invite = this.invite = /^(discord.gg\/|discordapp.com\/invite\/)([a-z0-9]+)$/gi;
   };
 
+  /**
+   * Returns a predefined color
+   * @param {string} color 
+   */
+  getColor(color) {
+      let colors = {
+          red: 15747399,
+          yellow: 16439902,
+          green: 4437377,
+          blue: 9031664,
+          darkblue: 26544,
+          pink: 16736378,
+          spotify: 1947988,
+          discordgrey: 2632496,
+          lotus: 15913095,
+          whitelotus: 15458257,
+          sentry: 11250431,
+          daili: 5628531,
+          moverstars: 54998
+      };
+      return colors[color];
+  }
+
   async sendSuccess(channelOrInteraction, content) {
     const embeds = [
       { 
