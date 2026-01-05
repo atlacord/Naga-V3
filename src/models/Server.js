@@ -9,6 +9,19 @@ const serverModel = mongoose.model('server_config', new Schema({
         logChannel: { type: String, default: null },
         ignoredChannels: { type: Array, default: null }
     },
+    xpBoost: {
+      roles: { 
+        type: Map, 
+        of: String,
+        default: () => new Map()
+      },
+      channels: {
+        type: Map, 
+        of: String,
+        default: () => new Map()
+      },
+      ignoredChannels: { type: Array, default: [] }
+    },
     joinMessages: { type: Array, default: [] },
     usedBanners: { type: Array, default: [] },
     topics: { type: Array, default: [] },
