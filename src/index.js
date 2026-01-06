@@ -23,8 +23,8 @@ if (!process.env.DB_CONNECTION_STRING) {
 
 // Set prefixes
 
-const prefix = process.env.PREFIX || 'n.';
-const devPrefix = process.env.DEV_PREFIX || '$';
+container.prefix = process.env.PREFIX || 'n.';
+container.devPrefix = process.env.DEV_PREFIX || '$';
 
 // Set log level
 
@@ -56,8 +56,8 @@ const client = new SapphireClient({
   intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
   loadMessageCommandListeners: true,
   fetchPrefix: (message) => {
-    if (container.developers.includes(message.author.id)) return [devPrefix, prefix];
-    return prefix;
+    if (container.developers.includes(message.author.id)) return [container.devPrefix, container.prefix];
+    return container.prefix;
   },
   logger: {
     level: logLevel
