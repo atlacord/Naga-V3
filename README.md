@@ -22,6 +22,33 @@ To access models within a command or listener file, use `this.container.models.g
 ## Accessing Utility Functions
 To access utility functions within a command or listener, use `this.container.utils`. For example, if I wanted to use the `sendSuccess` function, I would use `this.container.utils.sendSuccess()`. All utility functions are located in `src/lib/utils/Utilities.js`.
 
+## $command Placeholder
+You may want to include references to your currently set prefix + the command name in your command's information without having to hardcode the prefix and name in each file. You do so by using the `$command` placeholder, which will replace it with your prefix and the name when using `help [command]`.
+
+This currently only works for the `description` and `detailedDescription` fields.
+
+Example usage:
+```
+const { Command } = require('@sapphire/framework');
+
+class ChangeNickname extends Command {
+  constructor(context, options) {
+    super(context, {
+      ...options, 
+      name: 'changenick',
+      description: 'Change a user's nickname.',
+      detailedDescription: {
+        usage: '$command [user]'
+      }
+    });
+  }
+
+  async messageRun(message) {
+    // code
+  }
+}
+```
+
 ## Preconditions
 Command permissions are dictated by precondition files, which are located in `src/preconditions`. 
 
