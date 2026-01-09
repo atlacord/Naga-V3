@@ -118,7 +118,7 @@ class Color extends Command {
       return interaction.editReply({embeds: [embed]});
     } catch (err) {
       console.error(err);
-      interaction.editReply(`An error occurred: \`\`\`${err}\`\`\``)
+      this.container.utils.sendError(interaction.channel, err);
     }
   }
 }

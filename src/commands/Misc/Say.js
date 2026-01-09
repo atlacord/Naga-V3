@@ -53,7 +53,7 @@ class Say extends Command {
             channel.send(message);
         } catch (err) {
             console.error(err);
-            interaction.channel.send(err);
+            this.container.utils.sendError(interaction.channel, err);
         }
     }
 }

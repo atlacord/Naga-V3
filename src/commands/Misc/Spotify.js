@@ -72,13 +72,13 @@ class Spotify extends Command {
         await interaction.deferReply();
 
         try {
-            if (member.user.bot) return interaction.editReply('Please enter a human user.');
+            if (member.user.bot) return this.container.utils.sendError(interaction.channel, 'Please enter a human user.');
             let embed = this.spotifyPresence(member);
 
             interaction.editReply({embeds: [embed]});
         } catch (err) {
             console.error(err);
-            interaction.editReply(`An error occurred: \`\`\`${err}\`\`\``);
+            this.container.utils.sendError(interaction.channel, err);
         }
     }
 }

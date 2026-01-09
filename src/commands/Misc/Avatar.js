@@ -68,6 +68,7 @@ class Avatar extends Command {
             interaction.editReply({ embeds: [embed] })
         } catch(err) {
             console.error(err);
+            this.container.utils.sendError(interaction.channel, err);
         }
     }
 }
