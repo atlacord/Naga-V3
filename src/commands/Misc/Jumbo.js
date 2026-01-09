@@ -78,7 +78,7 @@ class Jumbo extends Command {
         interaction.editReply({ embeds: [embed] })
     } catch (err) {
       console.error(err);
-      interaction.editReply(`An error occurred: \`\`\`${err}\`\`\``)
+      this.container.utils.sendError(interaction.channel, err);
     }
   }
 }

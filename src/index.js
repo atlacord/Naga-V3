@@ -53,7 +53,7 @@ switch (process.env.LOG_LEVEL?.toLowerCase()) {
 // Create client
 
 const client = new SapphireClient({
-  intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+  intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildPresences],
   loadMessageCommandListeners: true,
   fetchPrefix: (message) => {
     if (container.developers.includes(message.author.id)) return [container.devPrefix, container.prefix];

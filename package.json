@@ -24,6 +24,7 @@
     "@sapphire/plugin-logger": "^4.1.0",
     "@sapphire/plugin-subcommands": "^7.0.1",
     "@sapphire/utilities": "^3.18.2",
+    "axios": "^1.13.2",
     "discord.js": "^14.24.2",
     "dotenv": "^17.2.3",
     "mongoose": "^8.19.3",

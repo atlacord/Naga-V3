@@ -81,7 +81,6 @@ class Utilities {
           blue: 9031664,
           darkblue: 26544,
           pink: 16736378,
-          spotify: 1947988,
           discordgrey: 2632496,
           lotus: 15913095,
           whitelotus: 15458257,
@@ -155,6 +154,14 @@ class Utilities {
     const num = parseInt(int, 10);
     return `#${num.toString(16).padStart(6, '0')}`;
   }
+
+  /**
+   * Escape special characters in regex
+   */
+  regEscape(str) {
+    return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+  }
+
 
   /**
    * Returns a list of Discord user flags in a human readable format
