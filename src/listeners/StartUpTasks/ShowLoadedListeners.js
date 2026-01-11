@@ -5,7 +5,7 @@ class ShowLoadedListeners extends Listener {
     super(context, {
       ...options, 
       once: true,
-      event: 'applicationCommandRegistriesRegistered'
+      event: 'modelsCreated'
     });
   }
 
@@ -17,8 +17,8 @@ class ShowLoadedListeners extends Listener {
     if (nonStartUpTaskListeners.length != 0) {
       this.container.logger.info('Loading listeners...');
 
-      for (const listener of nonStartUpTaskListeners) {
-        if (listener.enabled) this.container.logger.info(`+ Loaded ${listener.name}`);
+      for (const [listenerName, listener] of nonStartUpTaskListeners) {
+        if (listener.enabled) this.container.logger.info(`+ Loaded ${listenerName}`);
       }
     }
 

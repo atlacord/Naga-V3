@@ -6,7 +6,6 @@ class XPList extends InteractionHandler {
   constructor(ctx, options) {
     super(ctx, {
       ...options,
-      disabled: true,
       interactionHandlerType: InteractionHandlerTypes.Button
     })
   }

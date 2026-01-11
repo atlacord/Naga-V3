@@ -1,6 +1,14 @@
 const { Listener } = require('@sapphire/framework');
 
-const TASK_AMOUNT = 9;
+const fs = require('fs');
+
+const excludedFiles = ['FinalTasks.js'];
+
+const files = fs
+  .readdirSync(__dirname)
+  .filter(file => !excludedFiles.includes(file));
+
+const TASK_AMOUNT = files.length;
 
 class FinalTasks extends Listener {
   constructor(context, options) {

@@ -33,6 +33,10 @@ class Help extends Command {
     }
   }
 
+  insertPrefixAndCommandName(string, commandName) {
+    return string.replace('$command', `${this.container.prefix}${commandName}`);
+  }
+
   async allCommands(message) {
     const commands = this.container.stores.get('commands');
     const allCommands = {};
@@ -63,7 +67,7 @@ class Help extends Command {
         name: `All Commands for Naga`,
         iconURL: this.container.client.user.displayAvatarURL()
       },
-      description: 'You can only view commands you have permission to use. To see more information about a command, do `n.help [command]`.',
+      description: `You can only view commands you have permission to use. To see more information about a command, do \`${this.container.prefix}help [command]\`.`,
       fields: fields
     };
 
@@ -87,8 +91,10 @@ class Help extends Command {
     if (command.detailedDescription && Object.keys(command.detailedDescription).length > 0) {
       for (let [name, description] of Object.entries(command.detailedDescription)) {
         const capitalizedName = name[0].toUpperCase() + name.slice(1);
+
         if (Array.isArray(description)) description = description.join(', ');
-        fields.push({ name: capitalizedName, value: description });
+
+        fields.push({ name: capitalizedName, value: this.insertPrefixAndCommandName(description, command.name) });
       }
     }
 
@@ -98,7 +104,7 @@ class Help extends Command {
         name: `Help for ${command.name}`,
         iconURL: this.container.client.user.displayAvatarURL()
       },
-      description: command.description,
+      description: this.insertPrefixAndCommandName(command.description, command.name),
       fields: fields
     };
 

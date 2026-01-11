@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 require('@sapphire/plugin-logger/register');
 require('dotenv').config({ path: __dirname + '/.env' });
 
-container.developers = process.env.DEVELOPERS.split(',').map(dev => dev.trim());
-
 mongoose.connect(process.env.DB_CONNECTION_STRING)
   .then(() => container.logger.info(`Successfully connected to database!`))
   .catch((err) => console.error(err));
@@ -25,8 +23,8 @@ if (!process.env.DB_CONNECTION_STRING) {
 
 // Set prefixes
 
-const prefix = process.env.PREFIX || 'n.';
-const devPrefix = process.env.DEV_PREFIX || '$';
+container.prefix = process.env.PREFIX || 'n.';
+container.devPrefix = process.env.DEV_PREFIX || '$';
 
 // Set log level
 
@@ -58,8 +56,8 @@ const client = new SapphireClient({
   intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildPresences],
   loadMessageCommandListeners: true,
   fetchPrefix: (message) => {
-    if (container.developers.includes(message.author.id)) return [devPrefix, prefix];
-    return prefix;
+    if (container.developers.includes(message.author.id)) return [container.devPrefix, container.prefix];
+    return container.prefix;
   },
   logger: {
     level: logLevel

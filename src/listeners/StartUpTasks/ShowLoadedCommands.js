@@ -5,7 +5,7 @@ class ShowLoadedCommands extends Listener {
     super(context, {
       ...options, 
       once: true,
-      event: 'applicationCommandRegistriesRegistered'
+      event: 'modelsCreated'
     });
   }
 
