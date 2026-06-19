@@ -27,7 +27,9 @@
     "axios": "^1.13.2",
     "discord.js": "^14.24.2",
     "dotenv": "^17.2.3",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^8.19.3",
-    "node-cron": "^4.2.1"
+    "node-cron": "^4.2.1",
+    "tatsu": "^1.2.0"
   }
 }

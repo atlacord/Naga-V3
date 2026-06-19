@@ -8,8 +8,8 @@ class RoleInfo extends Command {
       aliases: ['ri'],
       description: 'Show information about a role.',
       detailedDescription: {
-        'Command Forms and Arguments': '`n.roleinfo [role]`\n' +
-                                       '**Role:** ID or name. If it\'s a name with multiple words, it must be wrapped in double quotes. Required.'
+        'Command Forms and Arguments': 'n.roleinfo [role]\n' +
+        '**Role:** ID or name. If it\'s a name with multiple words, it must be wrapped in double quotes. Required.'
       }
     });
 
@@ -35,15 +35,25 @@ class RoleInfo extends Command {
     }
   }
 
-  async messageRun(message, args) {
+  registerApplicationCommands(registry) {
+    registry.registerChatInputCommand((builder) =>
+      builder
+        .setName('roleinfo')
+        .setDescription('Shows information about a role')
+        .addRoleOption((option) =>
+        option
+        .setName('role')
+        .setDescription('A role')
+        .setRequired(true)
+      )
+    )
+  };
+
+  async roleInfo(messageOrInteraction, roleArg) {
     try {
-      const roleArg = await args.pick('string').catch(() => null);
+      const role = await this.container.resolver.role(messageOrInteraction.guild, roleArg);
 
-      if (!roleArg) return this.container.utils.sendError(message.channel, 'You need to provide a role!');
-
-      const role = (await Resolvers.resolveRole(roleArg, message.guild)).unwrapOrElse(() => null);
-
-      if (!role) return this.container.utils.sendError(message.channel, 'Unknown role!');
+      if (!role) return this.container.utils.sendError(messageOrInteraction.channel, 'Unknown role!');
 
       const roleColors = [`Primary: \`${this.container.utils.integerToHex(role.colors.primaryColor)}\``];
       if (role.colors.secondaryColor) roleColors.push(`Secondary: \`#${role.colors.secondaryColor.toString(16)}\``);
@@ -59,7 +69,7 @@ class RoleInfo extends Command {
           name: role.name, 
           icon_url: null 
         },
-        thumbnail: { url: role.iconURL || null },
+        thumbnail: { url: null },
 
         fields: [
           { name: 'Name', value: role.name, inline: true },
@@ -91,10 +101,22 @@ class RoleInfo extends Command {
         }
       }
 
-      await message.channel.send({ embeds: [embed] });
+      await messageOrInteraction.channel.send({ embeds: [embed] });
     } catch (err) {
-      this.container.utils.sendError(message.channel, `An error occurred: \`\`\`${err}\`\`\``);
+      this.container.utils.sendError(messageOrInteraction.channel, `An error occurred: \`\`\`${err}\`\`\``);
     }
+  }
+
+  async messageRun(message, args) {
+    const roleArg = await args.pick('string').catch(() => null);
+    if (!roleArg) return this.container.utils.sendError(messageOrInteraction.channel, 'You need to provide a role!');
+    this.roleInfo(message, roleArg);
+  }
+
+  async chatInputRun(interaction) {
+    const role = interaction.options.getRole('role');
+    await interaction.deferReply();
+    this.roleInfo(interaction, role);
   }
 }
 
