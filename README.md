@@ -1,7 +1,7 @@
-# Naga V3
+# Naga v3
 Naga is a multi-purpose bot created for the [Avatar: The Last Airbender Discord community](https://discord.gg/avatar). It is written in JavaScript using the [discord.js](https://github.com/discordjs/discord.js) library and the [Sapphire](https://github.com/sapphiredev/framework) framework. It's recommened that you familiarize yourself with both before using V3.
 
-This is the third version of this bot. V2 is located [here](https://github.com/atlacord/Naga).
+This is the third version of this bot. v2 is located [here](https://github.com/atlacord/Naga).
 
 ## Set Up
 ### Prequisites
@@ -28,7 +28,7 @@ You may want to include references to your currently set prefix + the command na
 This currently only works for the `description` and `detailedDescription` fields.
 
 Example usage:
-```
+```js
 const { Command } = require('@sapphire/framework');
 
 class ChangeNickname extends Command {
@@ -60,18 +60,18 @@ Developers can bypass all command restrictions. If you want to make a command de
 
 For more information about preconditions, including how to use them in command, check [this](https://sapphirejs.dev/docs/Guide/preconditions/what-are-preconditions) out.
 
-## Changes from V2
+## Changes from v2
 - Models don't have to be imported into command or listener files anymore, they can be access from `this.container`.
 - `Model.findById()` no longer accepts a callback function — you have to use `await` or `then/catch`. This is because V3 uses a newer version of Mongoose.
   - So, for instance, this code is no longer valid: 
-  ```
+  ```js
   const profile = this.container.models.get('Profile');
   profile.findById('260600155630338048', (err, doc) => {
     // code
   });
   ```
   - You would have to do something like this: 
-  ```
+  ```js
   const profile = this.container.models.get('Profile');
 
   // one way
