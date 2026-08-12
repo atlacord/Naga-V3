@@ -70,12 +70,12 @@ class Exec extends Command {
         };
     };
 
-    messageRun(message, args) {
+    async messageRun(message, args) {
         const command = await args.pick('string').catch(() => null); 
         await this.execute(message, command);
     };
 
-    chatInputRun(interaction) {
+    async chatInputRun(interaction) {
         const command = interaction.options.getString('command');
         await this.execute(interaction, command);
     };

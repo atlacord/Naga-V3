@@ -44,11 +44,11 @@ class Restart extends Command {
         };
     };
 
-    messageRun(message) {
+    async messageRun(message) {
         await this.restart(message);
     };
 
-    chatInputRun(interaction) {
+    async chatInputRun(interaction) {
         await this.restart(interaction);
     };
 };
