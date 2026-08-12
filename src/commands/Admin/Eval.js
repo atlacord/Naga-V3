@@ -87,14 +87,14 @@ class Eval extends Command {
         };
     };
 
-    messageRun(message, args) {
-        const eval = await args.pick('string').catch(() => null); 
-        await this.evaluate(message, eval);
+    async messageRun(message, args) {
+        const evalValue = await args.pick('string').catch(() => null); 
+        await this.evaluate(message, evalValue);
     };
 
-    chatInputRun(interaction) {
-        const eval = interaction.options.getString('eval');
-        await this.evaluate(interaction, eval);
+    async chatInputRun(interaction) {
+        const evalValue = interaction.options.getString('eval');
+        await this.evaluate(interaction, evalValue);
     };
 };
 
