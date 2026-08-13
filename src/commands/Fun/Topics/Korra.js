@@ -14,7 +14,7 @@ class KorraTopic extends Command {
             aliases: ['lok', 'tlok'],
             description: 'Sends a random Legend of Korra topic to spark a conversation!',
             detailedDescription: {
-                'Command Forms and Arguments': 'n.topic korra'
+                'Command Forms and Arguments': 'n.korra'
             }
         });
     }
@@ -22,7 +22,7 @@ class KorraTopic extends Command {
     registerApplicationCommands(registry) {
         registry.registerChatInputCommand((builder) =>
         builder
-        .setName('topic')
+        .setName('korra')
         .setDescription('Sends a random Legend of Korra topic to spark a conversation!')
         )
     };

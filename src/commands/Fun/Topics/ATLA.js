@@ -14,7 +14,7 @@ class ATLATopic extends Command {
             aliases: [],
             description: 'Sends a random ATLA topic to spark a conversation!',
             detailedDescription: {
-                'Command Forms and Arguments': 'n.topic atla'
+                'Command Forms and Arguments': 'n.atla'
             }
         });
     }
@@ -22,7 +22,7 @@ class ATLATopic extends Command {
     registerApplicationCommands(registry) {
         registry.registerChatInputCommand((builder) =>
         builder
-        .setName('topic')
+        .setName('atla')
         .setDescription('Sends a random ATLA topic to spark a conversation!')
         )
     };
