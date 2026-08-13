@@ -1,4 +1,5 @@
-const { Subcommand, Resolvers } = require('@sapphire/framework');
+const { Resolvers } = require('@sapphire/framework');
+const { Subcommand } = require('@sapphire/plugin-subcommands');
 
 class Topics extends Subcommand {
     constructor(context, options) {
@@ -17,7 +18,7 @@ class Topics extends Subcommand {
     registerApplicationCommands(registry) {
         registry.registerChatInputCommand((builder) =>
         builder
-        .setName('topic')
+        .setName('topics')
         .setDescription('Topic management')
         )
     };
