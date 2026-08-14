@@ -1,5 +1,5 @@
 const { Command, Resolvers } = require('@sapphire/framework');
-const quotes = require('../../../assets/irohquotes.json');
+const quotes = require('../../assets/irohquotes.json');
 
 class IrohQuote extends Command {
     constructor(context, options) {
